@@ -1,0 +1,33 @@
+// Schéma Prisma du Portail Solayia
+// Pour l'instant : socle d'authentification et de gestion des utilisateurs.
+// Chaque module (prospection, dev, e-learning) ajoutera ses propres modèles ici.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Rôles applicatifs. Sert à conditionner l'accès aux modules.
+enum Role {
+  ADMIN // accès total à la plateforme
+  MANAGER // encadrement, vue d'équipe
+  AGENT // mandataire / utilisateur métier standard
+}
+
+/// Utilisateur du portail interne.
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         Role     @default(AGENT)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
