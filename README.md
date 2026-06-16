@@ -112,4 +112,4 @@ administrateur de la plateforme.
 ## Documentation
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — vision modulaire et feuille de route.
-- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — mise en production (Vercel ou Docker).
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — mise en production sur **Clever Cloud** (Docker, hébergement français/RGPD).
