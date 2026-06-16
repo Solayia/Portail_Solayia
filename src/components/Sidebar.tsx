@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Role } from "@prisma/client";
 import { MODULES } from "@/lib/modules";
 
 const baseLink =
   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition";
 
-export function Sidebar() {
+export function Sidebar({ role }: { role?: Role }) {
   const pathname = usePathname();
 
   return (
@@ -58,6 +59,25 @@ export function Sidebar() {
             </Link>
           );
         })}
+
+        {role === Role.ADMIN && (
+          <>
+            <div className="px-3 pb-1 pt-4 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Réglages
+            </div>
+            <Link
+              href="/admin/users"
+              className={`${baseLink} ${
+                pathname.startsWith("/admin")
+                  ? "bg-brand-50 text-brand-700"
+                  : "text-slate-600 hover:bg-slate-50"
+              }`}
+            >
+              <span>⚙️</span>
+              Administration
+            </Link>
+          </>
+        )}
       </nav>
     </aside>
   );

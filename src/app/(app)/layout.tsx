@@ -12,7 +12,7 @@ export default async function AppLayout({
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar role={user?.role} />
 
       <div className="flex flex-1 flex-col">
         <header className="flex h-14 items-center justify-end gap-4 border-b border-slate-200 bg-white px-6">

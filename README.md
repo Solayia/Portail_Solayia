@@ -9,6 +9,7 @@ navigation, gestion des utilisateurs).
 | Module          | État    | Description                                                       |
 | --------------- | ------- | ----------------------------------------------------------------- |
 | 🏠 Accueil       | ✅ Livré | Dashboard d'entrée + navigation entre modules                     |
+| ⚙️ Administration | ✅ Livré | Gestion des utilisateurs : ajout, suppression, rôles, activation  |
 | 🎯 Prospection   | 🔜 À venir | CRM léger : prospects, pipeline, relances, enrichissement données |
 | 🛠️ Développement | 🔜 À venir | Suivi des projets de dev et outils internes                       |
 | 🎓 E-learning    | 🔜 À venir | Cours, modules et suivi de progression                            |
@@ -49,7 +50,7 @@ openssl rand -base64 32
 ### 3. Base de données
 
 ```bash
-npm run db:push     # crée les tables à partir du schéma Prisma
+npm run db:migrate  # applique les migrations Prisma (crée les tables)
 npm run db:seed     # crée l'utilisateur admin par défaut
 ```
 
@@ -94,5 +95,21 @@ src/
 └── middleware.ts           # protège toutes les routes sauf /login
 ```
 
-Voir [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) pour la vision modulaire et la
-feuille de route.
+## Espace d'administration
+
+Réservé aux comptes **ADMIN** (lien « Administration » dans la barre latérale, ou
+`/admin/users`). Il permet de :
+
+- créer un utilisateur (nom, email, mot de passe provisoire, rôle) ;
+- changer le rôle (`ADMIN` / `MANAGER` / `AGENT`) ;
+- activer / désactiver un compte (un compte désactivé ne peut plus se connecter) ;
+- réinitialiser un mot de passe ;
+- supprimer un utilisateur.
+
+Garde-fous : impossible de supprimer/désactiver son propre compte ni le dernier
+administrateur de la plateforme.
+
+## Documentation
+
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — vision modulaire et feuille de route.
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — mise en production (Vercel ou Docker).
